@@ -1,2 +1,4 @@
 /*.mat
 *.png
+/pos_cog_matr/*
+/led_cog_matr/*
