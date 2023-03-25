@@ -12,6 +12,7 @@ def rescale(arr):
     arr_max = arr.max()
     return (arr - arr_min) / (arr_max - arr_min)
 
+
 def norm_3_4(arr):
     arr_flat = arr.flatten()
     arr_sort = np.array(sorted(arr_flat))
@@ -25,6 +26,8 @@ def norm_3_4(arr):
     arr[arr > median2] = median2
     arr = 255.0 * rescale(arr)
     return arr
+
+
 def norm_1_4(arr):
     arr_flat = arr.flatten()
     arr_sort = np.array(sorted(arr_flat))
@@ -34,6 +37,7 @@ def norm_1_4(arr):
     arr[arr < median2] = median2
     arr = 255.0 * rescale(arr)
     return arr
+
 
 def max_axis(arr, k=1):
     red = arr[:, :, 0]
@@ -58,7 +62,7 @@ def drowRGB(R, G, B, name):
     arr[:, :, 0] = R
     arr[:, :, 1] = G
     arr[:, :, 2] = B
-    arr = max_axis(arr, k=coef)
+    arr = max_axis(np.sqrt(arr), k=coef)
     # drowGrafics(arr, name + '2')
 
     red = arr[:, :, 0]
@@ -348,7 +352,7 @@ if __name__ == '__main__':
     # H_alpha('led_cog_matr/scat_mat.mat','led_RGB')
     # H_alpha('led_cog_matr/scat_mat.mat', 'led_RGB')
 
-    decompositionMatrix('pos.mat', 'pos_norm_max_axis')
+    decompositionMatrix('led.mat', 'led_norm_max_axis')
     # path = 'pos_simple.mat'
     # name = 'pos_med4'
     # mat = scipy.io.loadmat(path)
