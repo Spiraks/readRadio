@@ -1,0 +1,35 @@
+No numba
+led
+    calc_elem_cog_matr  took 19.6866 secs   (367, 269, 3, 3)
+    cogerent            took 0.7882 secs
+    H_alpha             took 11.3559 secs
+
+    drowRGB             took 0.1834 secs    -  0.2077 secs
+    decompositionMatrix took 6.1021 secs    -  0.2668 secs
+
+pos
+    calc_elem_cog_matr  took 28.8226 secs   (534, 271, 3, 3)
+    cogerent            took 1.0802 secs
+    H_alpha             took 15.0108 secs
+
+    drowRGB             took 0.1966 secs    - 0.2046 secs
+    decompositionMatrix took 8.7158 secs    - 0.2849 secs
+
+fast                             |                             |  Numba                      |
+    led                          |                             |                             |
+       H_alpha took 34.1529 secs |  get_mat took 9.4891 secs   |  get_mat took 10.7892 secs  |
+                                 |  H_alpha took 23.2284 secs  |  H_alpha took 19.6154 secs  |
+    pos                          |                             |                             |
+       H_alpha took 41.9993 secs |  get_mat took 11.5748 secs  |  get_mat took 11.3982 secs  |
+                                 |  H_alpha took 30.9826 secs  |  H_alpha took 24.4678 secs  |
+
+
+Способы формирования комплексных чисел
+gg = np.vectorize(complex)(gg_re, gg_im)        get_impl took 47.5274 secs
+vv = np.vectorize(complex)(vv_re, vv_im)
+gv = np.vectorize(complex)(gv_re, gv_im)
+
+gg = gg_re + gg_im * 1j                         get_impl took 1.1434 secs
+vv = vv_re + vv_im * 1j
+gv = gv_re + gv_im * 1j
+
