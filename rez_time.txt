@@ -1,35 +1,54 @@
 No numba
 led
-    calc_elem_cog_matr  took 19.6866 secs   (367, 269, 3, 3)
-    cogerent            took 0.7882 secs
-    H_alpha             took 11.3559 secs
+    calc_elem_cog_matr  took 19,6866 secs   (367, 269, 3, 3)
+    cogerent            took 0,7882 secs
+    H_alpha             took 11,3559 secs
 
-    drowRGB             took 0.1834 secs    -  0.2077 secs
-    decompositionMatrix took 6.1021 secs    -  0.2668 secs
+    drowRGB             took 0,1834 secs    -  0,2077 secs
+    decompositionMatrix took 6,1021 secs    -  0,2668 secs
 
 pos
-    calc_elem_cog_matr  took 28.8226 secs   (534, 271, 3, 3)
-    cogerent            took 1.0802 secs
-    H_alpha             took 15.0108 secs
+    calc_elem_cog_matr  took 28,8226 secs   (534, 271, 3, 3)
+    cogerent            took 1,0802 secs
+    H_alpha             took 15,0108 secs
 
-    drowRGB             took 0.1966 secs    - 0.2046 secs
-    decompositionMatrix took 8.7158 secs    - 0.2849 secs
+    drowRGB             took 0,1966 secs    - 0,2046 secs
+    decompositionMatrix took 8,7158 secs    - 0,2849 secs
 
-fast                             |                             |  Numba                      |
-    led                          |                             |                             |
-       H_alpha took 34.1529 secs |  get_mat took 9.4891 secs   |  get_mat took 10.7892 secs  |
-                                 |  H_alpha took 23.2284 secs  |  H_alpha took 19.6154 secs  |
-    pos                          |                             |                             |
-       H_alpha took 41.9993 secs |  get_mat took 11.5748 secs  |  get_mat took 11.3982 secs  |
-                                 |  H_alpha took 30.9826 secs  |  H_alpha took 24.4678 secs  |
+fast                             |                             |  Numba                      | get_mat took         12,5075 secs    |get_mat took           8,7586 secs
+    led                          |                             |                             | commress_elem took   8,0218 secs     |commress_elem took     5,4774 secs
+       H_alpha took 34,1529 secs |  get_mat took 9,4891 secs   |  get_mat took 10,7892 secs  | draw_rgb took        0,0638 secs     |draw_rgb took          0,0404 secs
+                                 |  H_alpha took 23,2284 secs  |  H_alpha took 19,6154 secs  | create_cog_arr took  0,0040 secs     |create_cog_arr took    0,0022 secs
+    pos                          |                             |                             | h_alpha took         1,0154 secs     |h_alpha took           0,6630 secs
+       H_alpha took 41,9993 secs |  get_mat took 11,5748 secs  |  get_mat took 11,3982 secs  | color_matrix took    0,0127 secs     |color_matrix took      0,0080 secs
+                                 |  H_alpha took 30,9826 secs  |  H_alpha took 24,4678 secs  | decompoz took        25,7977 secs    |decompoz took          18,3011 secs
 
 
 Способы формирования комплексных чисел
-gg = np.vectorize(complex)(gg_re, gg_im)        get_impl took 47.5274 secs
-vv = np.vectorize(complex)(vv_re, vv_im)
-gv = np.vectorize(complex)(gv_re, gv_im)
+gg = np,vectorize(complex)(gg_re, gg_im)        get_impl took 47,5274 secs
+vv = np,vectorize(complex)(vv_re, vv_im)
+gv = np,vectorize(complex)(gv_re, gv_im)
 
-gg = gg_re + gg_im * 1j                         get_impl took 1.1434 secs
+gg = gg_re + gg_im * 1j                         get_impl took 1,1434 secs
 vv = vv_re + vv_im * 1j
 gv = gv_re + gv_im * 1j
+
+Добавление атрибута(parallel=True, nogil=True) к функции commress_elem замедляет ее в два раза!!!! (учитывая первый "холодный" запуск)
+Добавление декоратора @nb,njit к функции commress_elem замедляет ее в ТРИ раза!!!! (учитывая первый "холодный" запуск)
+
+11,5278
+14,2398
+0,0668
+0,0030
+1,0167
+0,0126
+31,3423
+7,5424
+9,3829
+0,0265
+0,0023
+0,6427
+0,0080
+20,6079
+
 

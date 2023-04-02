@@ -4,6 +4,7 @@ import scipy.io
 import fast
 import numpy as np
 from PIL import Image
+import my_stat
 
 
 def draw_grafics(h, alpha, color_cog, name):
@@ -75,8 +76,7 @@ def draw_rgb(r, g, b, name, k=1):
     arr[:, :, 0] = r
     arr[:, :, 1] = g
     arr[:, :, 2] = b
-    arr = fast.max_axis(np.sqrt(np.absolute(arr)), k=k)
-
+    arr = my_stat.max_axis(np.sqrt(np.absolute(arr)), k=k)
     red = arr[:, :, 0]
     green = arr[:, :, 1]
     blue = arr[:, :, 2]
